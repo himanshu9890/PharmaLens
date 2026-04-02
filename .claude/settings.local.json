@@ -11,7 +11,12 @@
       "Bash(./backend/venv/Scripts/uvicorn backend.main:app --reload --port 8000)",
       "Bash(curl -s http://localhost:8000/api/v1/health)",
       "Bash(npm run:*)",
-      "Bash(curl -s http://localhost:5173)"
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s https://pharmalens-eaau.onrender.com/api/v1/health)",
+      "Bash(curl -s \"https://pharmalens-eaau.onrender.com/api/v1/trials/search?therapy_area=NSCLC&status=recruiting&per_page=5\")",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'Total: {d[\\\\\"total_count\\\\\"]}'\\); [print\\(f'  {t[\\\\\"nct_id\\\\\"]} | {t[\\\\\"phase\\\\\"]} | {t[\\\\\"sponsor_name\\\\\"]}'\\) for t in d['trials'][:5]]\")",
+      "Bash(curl -s \"https://pharmalens-eaau.onrender.com/api/v1/trials/search?therapy_area=NSCLC&status=recruiting&per_page=3\" -w \"\\\\nHTTP_STATUS:%{http_code}\")",
+      "WebFetch(domain:clinicaltrials.gov)"
     ]
   }
 }

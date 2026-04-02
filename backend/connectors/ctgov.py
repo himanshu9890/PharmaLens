@@ -255,11 +255,10 @@ async def search_trials(
             "next_page_token": data.get("nextPageToken"),
         }
     except httpx.HTTPStatusError as exc:
-        if exc.response.status_code == 403 and settings.debug:
-            # Local dev only: Cloudflare blocks residential IPs.
-            # On Render/production servers this path is never taken.
+        if exc.response.status_code == 403:
             logger.warning(
-                "ClinicalTrials.gov returned 403 — serving mock data (local dev only)."
+                "ClinicalTrials.gov returned 403 (IP blocked) — serving mock data. "
+                "Check /api/v1/health/ctgov to diagnose."
             )
             from backend.connectors.mock_data import filter_mock_trials
             results = filter_mock_trials(query=query, phases=phases, status=status)

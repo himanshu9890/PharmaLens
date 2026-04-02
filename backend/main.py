@@ -45,3 +45,19 @@ async def shutdown() -> None:
 @app.get("/api/v1/health", tags=["meta"])
 async def health() -> dict:
     return {"status": "ok", "version": "0.1.0"}
+
+
+@app.get("/api/v1/health/ctgov", tags=["meta"])
+async def health_ctgov() -> dict:
+    """Probe ClinicalTrials.gov reachability from this server's IP."""
+    import httpx
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            r = await client.get(
+                "https://clinicaltrials.gov/api/v2/studies",
+                params={"format": "json", "pageSize": 1, "query.cond": "cancer"},
+                headers={"User-Agent": "PharmaLens/0.1", "Accept": "application/json"},
+            )
+        return {"reachable": r.status_code == 200, "status_code": r.status_code}
+    except Exception as exc:
+        return {"reachable": False, "error": str(exc)}

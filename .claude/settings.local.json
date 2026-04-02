@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Command docker:*)",
+      "Bash(./venv/Scripts/pip list:*)",
+      "Bash(py -0)",
+      "Bash(./venv/Scripts/pip install:*)",
+      "Bash(timeout 8 ./venv/Scripts/uvicorn backend.main:app --port 8000)",
+      "Bash(timeout 8 ./backend/venv/Scripts/uvicorn backend.main:app --port 8000)",
+      "Bash(./backend/venv/Scripts/python -c ':*)",
+      "Bash(./backend/venv/Scripts/uvicorn backend.main:app --reload --port 8000)",
+      "Bash(curl -s http://localhost:8000/api/v1/health)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:5173)"
+    ]
+  }
+}

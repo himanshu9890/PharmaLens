@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: pharmalens-api
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: DEBUG
+        value: "false"
+      - key: CORS_ORIGINS
+        value: '["https://pharmalens.vercel.app","https://*.vercel.app"]'
+      # Optional — add these in the Render dashboard once you have the values:
+      # - key: DATABASE_URL
+      #   value: postgresql+asyncpg://...   (from Supabase)
+      # - key: REDIS_URL
+      #   value: redis://...               (from Upstash)

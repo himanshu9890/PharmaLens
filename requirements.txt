@@ -1,0 +1,3 @@
+# Root-level requirements file — Render picks this up automatically.
+# Installs from the backend package.
+-r backend/requirements.txt

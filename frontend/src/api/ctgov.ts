@@ -154,7 +154,7 @@ export async function getMeshSuggestionsDirect(q: string): Promise<MeshSuggestio
     })
     return (data as Array<Record<string, unknown>>).map((item) => ({
       label: String(item.label ?? ''),
-      ui: String(item.resource ?? '').split('/').at(-1) ?? '',
+      ui: String(item.resource ?? '').split('/').pop() ?? '',
     }))
   } catch {
     return []
